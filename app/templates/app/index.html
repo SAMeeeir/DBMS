@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+     
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color:#9df9ef;
+            margin: 0;
+            padding: 0;
+            
+        }
+        
+        .my-form {
+            width: 25%;
+            margin-top: 50px;
+            margin-left:50px;
+            padding: 20px;
+           
+            border-radius: 5px;
+            float=left;
+
+            background-color:#ff8c00;
+
+            float:left;
+        }
+        
+        .my-form label {
+            display: block;
+            margin-bottom: 5px;
+            
+        }
+        
+        
+        .my-form input {
+            width: 90%;
+            padding: 5px;
+            margin-bottom: 0px;
+            border-radius: 30px;
+            border: 1px solid #ccc;
+            
+        }
+        
+        .my-form .submit-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .my-form .submit-button:hover {
+            background-color: #45a049;
+        }
+        
+        .table {
+            width: 50%;
+            float:right;
+            margin-top:200px;
+            margin-right:80px;
+            
+           
+        }
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background-color:#a28089;
+           
+        }
+        
+        th,td{
+          text-align:left;
+          padding:10px;
+          
+        }
+        td{
+            background-color:#D6EEEE;
+        }
+        
+        
+        .delete-link {
+            color: #ff0000;
+            text-decoration: none;
+           
+        }
+        
+        .delete-link:hover {
+            text-decoration: underline;
+        }
+        
+        .dropbtn {
+           
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+          }
+          
+          .dropdown {
+            position: relative;
+            display: inline-block;
+          }
+          
+          .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #4CAF50;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+          }
+          
+          .dropdown-content a {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            background-color:#D6EEEE;
+          }
+          
+          .dropdown-content a:hover {background-color: #f1f1f1}
+          
+          .dropdown:hover .dropdown-content {
+            display: block;
+          }
+          
+          .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+          }
+    </style>
+</head>
+<body>
+    {% comment "showing the form" %}{% endcomment %}
+    <form action="" method='POST' class="my-form">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" value='submit' class="submit-button">Submit</button>
+    </form>
+    <div class="table">
+        
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Roll No</th>
+            <th>Department</th>
+            <th>Gender</th>
+            <th>Delete</th>
+            <th><div class="dropdown">{% comment "dropdown button for sorting" %}{% endcomment %}
+                <button class="dropbtn">Actions</button>
+                <div class="dropdown-content">
+                    <a href="?sort=name">Sort By Name</a>
+                    <a href="?sort=rollno">Sort By ROllNO</a>
+                    <a href="?sort=age">Sort By Age</a>
+                    <a href="?sort=female">Only Female</a>
+                    <a href="?sort=male">Only Male</a>
+                    <a href="{% url 'deleteall' %}" class="delete-all-link">Delete All</a>
+                    
+                </div>
+              </div></th>
+        </tr>
+        {% comment "iterating the queryset " %}{% endcomment %}
+        {% for item in data %}
+        <tr>
+            <td>{{ item.first_name }}</td>
+            <td>{{ item.last_name }}</td>
+            <td>{{ item.age }}</td>
+            <td>{{ item.rollno}}</td>
+            <td>{{ item.department}}</td>
+            <td>{{ item.gender}}</td>
+            
+            {% comment "link for delete" %}{% endcomment %}
+            <td><a href="{% url 'delete' item.rollno %}" class="delete-link">Delete</a></td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </table>
+   
+
+    
+</div>
+</body>
+</html>
+
+
+
