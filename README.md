@@ -3,6 +3,6 @@
 ->python -version==3.11
           ->to run the code
 ->go to terminal
-->clone the project with https://github.com/SAMeeeir/DBMS.git
+->clone the project with git clone https://github.com/SAMeeeir/DBMS.git
 ->cd DBMS
 ->python manage.py runserver
