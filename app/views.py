@@ -112,7 +112,7 @@ def home(request):
                     [first_name, last_name, age, gender, rollno, department]
                 )
 
-            return redirect('/home')
+            return redirect('/')
     
     #for sorting according to user request
     if request.GET.get('sort')=='name':
@@ -136,13 +136,13 @@ def home(request):
 def delete(request, id):
     with connection.cursor() as cursor:
         cursor.execute("DELETE FROM app_student WHERE rollno = %s", [id])
-    return redirect('/home')
+    return redirect('/')
 
 
 
 def deleteall(request):
     with connection.cursor() as cursor:
         cursor.execute("DELETE FROM app_student")
-    return redirect('/home')
+    return redirect('/')
 
 
